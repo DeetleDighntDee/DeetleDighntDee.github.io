@@ -659,6 +659,8 @@
     
     fetch('https://script.google.com/macros/s/AKfycby8xnFP8uMjTUlm8ABR6e8gSeRSZ2DifdvFMoxUqI7MiAnUSGAdy9VFtXtyuWcvnPS-0A/exec', {
       method: 'POST',
+      mode: 'no-cors',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: new URLSearchParams({
         'full-name': name,
         'email': email,
