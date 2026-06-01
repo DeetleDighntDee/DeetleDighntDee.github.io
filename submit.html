@@ -589,9 +589,7 @@
     </label>
 
     <!-- SUBMIT -->
-    <button class="submit-btn" id="submitBtn" type="button" disabled onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSfcM3SItcRXjyeqplRHgTW-198bNCsTrSptuUgBMxkQqTjUbg/viewform?usp=header', '_blank')">Present Yourself to the Council</button>
-      Present Yourself to the Council
-    </button>
+    <button class="submit-btn" id="submitBtn" type="button" disabled onclick="handleSubmit(event)">Present Yourself to the Council</button>
     <p class="submit-note">The Council will review your submission. You will be contacted if selected.</p>
 
   </form>
@@ -660,9 +658,19 @@
     const form = e.target;
     const data = new FormData(form);
 
-    fetch('/', {
+    const agreed = document.getElementById('agreeBox').checked ? 'Yes' : 'No';
+    
+    fetch('https://script.google.com/macros/s/AKfycbyH7U-TWWlTyOLtFYP1NtPc1ymgmuydzBkeSFPdSQYykBDwO4PJaFFXtrf5jtzFOmarwQ/exec', {
       method: 'POST',
-      body: data,
+      body: new URLSearchParams({
+        'full-name': name,
+        'email': email,
+        'instagram': document.getElementById('instagram').value.trim(),
+        'village': village,
+        'why-village': document.getElementById('whyVillage').value.trim(),
+        'valises': document.getElementById('valises').value.trim(),
+        'agreed': agreed
+      })
     })
     .then(() => {
       document.getElementById('formWrap').style.display = 'none';
