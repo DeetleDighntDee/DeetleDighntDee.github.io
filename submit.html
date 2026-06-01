@@ -645,7 +645,7 @@
   }
 
   function handleSubmit(e) {
-    e.preventDefault();
+    if (e) e.preventDefault();
     const name = document.getElementById('fullName').value.trim();
     const email = document.getElementById('email').value.trim();
     const village = document.getElementById('selectedVillage').value;
@@ -654,9 +654,6 @@
       alert('Please complete all required fields before presenting yourself to the Council.');
       return;
     }
-
-    const form = e.target;
-    const data = new FormData(form);
 
     const agreed = document.getElementById('agreeBox').checked ? 'Yes' : 'No';
     
