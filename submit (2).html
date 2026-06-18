@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Submit to The Hat Council — Face2Face with Gary</title>
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cutive+Mono&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #000000;
+    --parchment: #d9c99a;
+    --rust: #5a1a05;
+    --gold: #6b4400;
+    --card-bg: rgba(100,60,0,0.08);
+    --border: rgba(107,68,0,0.4);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--parchment);
+    color: var(--ink);
+    font-family: 'Lora', serif;
+    font-size: 18px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  .frame {
+    position: fixed;
+    inset: 12px;
+    border: 2px solid var(--gold);
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0.45;
+  }
+  .frame::before {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    border: 1px solid var(--rust);
+    opacity: 0.35;
+  }
+
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 80px 48px 100px;
+  }
+
+  /* HEADER */
+  .masthead {
+    text-align: center;
+    margin-bottom: 50px;
+    animation: fadeDown 1s ease both;
+  }
+
+  .eyebrow {
+    font-family: 'Cutive Mono', monospace;
+    font-size: 0.88rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--rust);
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .title {
+    font-family: 'UnifrakturMaguntia', cursive;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    color: var(--ink);
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    font-family: 'UnifrakturMaguntia', cursive;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: var(--rust);
+    margin-bottom: 24px;
+  }
+
+  .ornament {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    justify-content: center;
+    opacity: 0.5;
+    margin-bottom: 24px;
+  }
+  .ornament span { font-size: 1.2rem; color: var(--gold); }
+  .ornament::before, .ornament::after {
+    content: '';
+    flex: 1; max-width: 100px; height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+
+  .intro {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--ink);
+    font-style: italic;
+    text-align: center;
+  }
+
+  /* VILLAGE REFERENCE (instructional, not a form field) */
+  .village-section {
+    margin-bottom: 40px;
+    animation: fadeUp 1s 0.2s ease both;
+  }
+
+  .field-label {
+    font-family: 'Cutive Mono', monospace;
+    font-size: 0.88rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .villages {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+
+  .village-card {
+    border: 2px solid var(--border);
+    background: var(--card-bg);
+    padding: 18px 12px;
+    text-align: center;
+  }
+
+  .village-card-name {
+    font-family: 'UnifrakturMaguntia', cursive;
+    font-size: 1.6rem;
+    color: var(--rust);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .village-card-desc {
+    font-family: 'Cutive Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  /* LEGAL RELEASE (informational — the real agreement checkbox lives in the form below) */
+  .legal-box {
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--rust);
+    padding: 28px 32px;
+    margin-bottom: 28px;
+    background: var(--card-bg);
+    animation: fadeUp 1s 0.4s ease both;
+  }
+
+  .legal-title {
+    font-family: 'Cutive Mono', monospace;
+    font-size: 0.88rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+
+  .legal-text {
+    font-size: 0.95rem;
+    line-height: 1.78;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+
+  .legal-text strong { font-weight: 700; }
+
+  .legal-items {
+    list-style: none;
+    margin: 16px 0;
+  }
+
+  .legal-items li {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--ink);
+    padding: 8px 0 8px 26px;
+    border-bottom: 1px solid rgba(107,68,0,0.15);
+    position: relative;
+  }
+  .legal-items li::before {
+    content: '✦';
+    position: absolute;
+    left: 0; top: 11px;
+    color: var(--gold);
+    font-size: 0.75rem;
+  }
+  .legal-items li:last-child { border-bottom: none; }
+
+  /* THE ACTUAL SUBMISSION — a single link to the real form, the only mechanism on this page */
+  .submit-section {
+    animation: fadeUp 1s 0.5s ease both;
+  }
+
+  .submit-btn {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    background: var(--rust);
+    color: var(--parchment);
+    border: none;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    font-family: 'Cutive Mono', monospace;
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: background 0.2s;
+  }
+
+  .submit-btn:hover { background: var(--ink); }
+
+  .submit-note {
+    font-family: 'Cutive Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+    text-align: center;
+    margin-top: 14px;
+    opacity: 0.6;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    margin-top: 60px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(107,68,0,0.3);
+  }
+
+  footer .brand {
+    font-family: 'UnifrakturMaguntia', cursive;
+    font-size: 1.1rem;
+    color: var(--rust);
+    margin-bottom: 8px;
+  }
+
+  footer .copy {
+    font-family: 'Cutive Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+    opacity: 0.6;
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 560px) {
+    .page { padding: 60px 24px 80px; }
+    .villages { grid-template-columns: 1fr; }
+    body { font-size: 16px; }
+    .legal-box { padding: 22px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="frame"></div>
+
+<div style="text-align:center; padding: 40px 24px 0;">
+  <iframe width="315" height="560"
+    src="https://www.youtube.com/embed/Lejc34WkIl8"
+    title="The Sacred Sound of Deetle"
+    frameborder="0"
+    allowfullscreen>
+  </iframe>
+  <p style="margin-top: 1rem; font-style: italic; font-family: 'Lora', serif;">The Council is listening. Watch first. Then submit.</p>
+</div>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="masthead">
+    <div class="eyebrow">Face2Face with Gary · The Hat Council</div>
+    <h1 class="title">Submit to the Council</h1>
+    <div class="subtitle">Declare Your Village</div>
+    <div class="ornament"><span>✦</span></div>
+    <p class="intro">
+      The Council is listening. In your 20-second video you must make two declarations —
+      which village you are from, and why the Valises do not belong to you.
+      The Council will deliberate and render its judgment.
+      The best submissions become canon.
+    </p>
+  </header>
+
+  <!-- VILLAGE REFERENCE -->
+  <div class="village-section">
+    <span class="field-label">Before you film — which village are you from?</span>
+    <div class="villages">
+      <div class="village-card">
+        <span class="village-card-name">Deetle</span>
+        <span class="village-card-desc">Artists · Dreamers · Wanderers</span>
+      </div>
+      <div class="village-card">
+        <span class="village-card-name">Dighnt</span>
+        <span class="village-card-desc">Builders · Rulers · Record-Keepers</span>
+      </div>
+      <div class="village-card">
+        <span class="village-card-name">Dee</span>
+        <span class="village-card-desc">Listeners · Rememberers · The Quiet</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEGAL RELEASE -->
+  <div class="legal-box">
+    <div class="legal-title">⚖ Submission Release Agreement</div>
+    <p class="legal-text">
+      By submitting a video to Face2Face with Gary, operating as
+      <strong>Deetle Deetle Dighnt Dighnt</strong>, you agree to the following terms:
+    </p>
+    <p>The Hat Council takes submissions seriously. Here is what that means.</p>
+    <ul class="legal-items">
+      <li>You grant Face2Face with Gary an unlimited, royalty-free license to use, edit, clip, and publish your submitted video across all platforms including but not limited to Instagram, TikTok, YouTube, and any future platforms.</li>
+      <li>You confirm that you are the sole creator of the submitted video and that it does not infringe on any third-party rights, copyrights, or trademarks.</li>
+      <li>You understand that submission does not guarantee inclusion in any episode. Selection is at Gary's sole discretion.</li>
+      <li>You acknowledge that no payment or compensation will be provided in exchange for your submission or its use.</li>
+      <li>You understand that Face2Face with Gary may generate revenue from content that includes your submission and you are not entitled to any portion of that revenue.</li>
+      <li>You confirm that you are 18 years of age or older, or have obtained parental or guardian consent.</li>
+      <li>Face2Face with Gary reserves the right to remove your submission from any published content at any time without notice.</li>
+      <li>This agreement does not constitute an employment, partnership, or agency relationship of any kind.</li>
+    </ul>
+    <p class="legal-text">
+      <strong>Note:</strong> This release is provided for informational purposes and does not constitute legal advice.
+      Face2Face with Gary recommends consulting a licensed attorney for formal legal protection.
+    </p>
+  </div>
+
+  <!-- THE ONE AND ONLY SUBMISSION FORM -->
+  <div class="submit-section">
+    <span class="field-label">Present yourself to the Council</span>
+    <a class="submit-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSccc02jlw3vinoBrclBZgvEloIumZ6Uwt_-jD8BAwakkNDAYg/viewform">Present Yourself to the Council</a>
+    <p class="submit-note">The Council will review your submission. You will be contacted if selected.</p>
+  </div>
+
+  <footer>
+    <div class="brand">Face2Face with Gary · Deetle Deetle Dighnt Dighnt</div>
+    <div class="copy">The Valises have not been moved · All submissions subject to release agreement · The seat remains occupied</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
