@@ -103,7 +103,7 @@
     text-align: center;
   }
 
-  /* VILLAGE SELECTOR */
+  /* VILLAGE REFERENCE (instructional, not a form field) */
   .village-section {
     margin-bottom: 40px;
     animation: fadeUp 1s 0.2s ease both;
@@ -126,35 +126,14 @@
     gap: 14px;
   }
 
-  .village-btn {
+  .village-card {
     border: 2px solid var(--border);
     background: var(--card-bg);
     padding: 18px 12px;
     text-align: center;
-    cursor: pointer;
-    transition: all 0.2s;
-    position: relative;
   }
 
-  .village-btn:hover {
-    border-color: var(--rust);
-    background: rgba(90,26,5,0.08);
-  }
-
-  .village-btn.selected {
-    border-color: var(--rust);
-    background: rgba(90,26,5,0.12);
-  }
-
-  .village-btn.selected::after {
-    content: '✦';
-    position: absolute;
-    top: 6px; right: 8px;
-    color: var(--rust);
-    font-size: 0.75rem;
-  }
-
-  .village-btn-name {
+  .village-card-name {
     font-family: 'UnifrakturMaguntia', cursive;
     font-size: 1.6rem;
     color: var(--rust);
@@ -162,7 +141,7 @@
     margin-bottom: 4px;
   }
 
-  .village-btn-desc {
+  .village-card-desc {
     font-family: 'Cutive Mono', monospace;
     font-size: 0.72rem;
     letter-spacing: 0.1em;
@@ -172,103 +151,7 @@
     line-height: 1.4;
   }
 
-  /* FORM */
-  .form-section {
-    animation: fadeUp 1s 0.3s ease both;
-  }
-
-  .field-group {
-    margin-bottom: 28px;
-  }
-
-  .field-input {
-    width: 100%;
-    padding: 14px 18px;
-    background: rgba(255,255,255,0.4);
-    border: 1px solid var(--border);
-    border-left: 4px solid var(--rust);
-    font-family: 'Lora', serif;
-    font-size: 1rem;
-    color: var(--ink);
-    outline: none;
-    transition: border-color 0.2s;
-    -webkit-appearance: none;
-  }
-
-  .field-input:focus {
-    border-color: var(--rust);
-    background: rgba(255,255,255,0.6);
-  }
-
-  .field-input::placeholder {
-    color: var(--ink);
-    opacity: 0.4;
-    font-style: italic;
-  }
-
-  textarea.field-input {
-    resize: vertical;
-    min-height: 120px;
-  }
-
-  /* FILE UPLOAD */
-  .upload-zone {
-    border: 2px dashed var(--border);
-    padding: 36px 24px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.2s;
-    background: rgba(255,255,255,0.2);
-    position: relative;
-  }
-
-  .upload-zone:hover, .upload-zone.dragover {
-    border-color: var(--rust);
-    background: rgba(90,26,5,0.05);
-  }
-
-  .upload-zone input[type="file"] {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    cursor: pointer;
-    width: 100%;
-    height: 100%;
-  }
-
-  .upload-icon {
-    font-size: 2rem;
-    margin-bottom: 10px;
-    display: block;
-  }
-
-  .upload-text {
-    font-family: 'Cutive Mono', monospace;
-    font-size: 0.88rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink);
-    margin-bottom: 6px;
-  }
-
-  .upload-sub {
-    font-size: 0.9rem;
-    color: var(--ink);
-    opacity: 0.6;
-    font-style: italic;
-  }
-
-  .upload-filename {
-    margin-top: 12px;
-    font-family: 'Cutive Mono', monospace;
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: var(--rust);
-    display: none;
-  }
-
-  /* LEGAL RELEASE */
+  /* LEGAL RELEASE (informational — the real agreement checkbox lives in the form below) */
   .legal-box {
     border: 1px solid var(--border);
     border-left: 5px solid var(--rust);
@@ -319,42 +202,20 @@
   }
   .legal-items li:last-child { border-bottom: none; }
 
-  /* CHECKBOX */
-  .checkbox-group {
-    display: flex;
-    gap: 14px;
-    align-items: flex-start;
-    margin-bottom: 28px;
-    padding: 20px;
-    border: 1px solid var(--border);
-    background: rgba(255,255,255,0.25);
-    cursor: pointer;
+  /* THE ACTUAL SUBMISSION — a single link to the real form, the only mechanism on this page */
+  .submit-section {
+    animation: fadeUp 1s 0.5s ease both;
   }
 
-  .checkbox-group input[type="checkbox"] {
-    width: 22px;
-    height: 22px;
-    flex-shrink: 0;
-    margin-top: 2px;
-    cursor: pointer;
-    accent-color: var(--rust);
-  }
-
-  .checkbox-label {
-    font-size: 0.95rem;
-    line-height: 1.7;
-    color: var(--ink);
-    font-weight: 700;
-    cursor: pointer;
-  }
-
-  /* SUBMIT BUTTON */
   .submit-btn {
+    display: block;
     width: 100%;
     padding: 20px;
     background: var(--rust);
     color: var(--parchment);
     border: none;
+    text-decoration: none;
+    text-align: center;
     cursor: pointer;
     font-family: 'Cutive Mono', monospace;
     font-size: 1rem;
@@ -362,11 +223,9 @@
     text-transform: uppercase;
     font-weight: 700;
     transition: background 0.2s;
-    animation: fadeUp 1s 0.5s ease both;
   }
 
   .submit-btn:hover { background: var(--ink); }
-  .submit-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
   .submit-note {
     font-family: 'Cutive Mono', monospace;
@@ -377,43 +236,6 @@
     text-align: center;
     margin-top: 14px;
     opacity: 0.6;
-  }
-
-  /* SUCCESS STATE */
-  .success-screen {
-    display: none;
-    text-align: center;
-    padding: 60px 20px;
-    animation: fadeUp 0.8s ease both;
-  }
-
-  .success-screen.visible { display: block; }
-
-  .success-icon { font-size: 3rem; margin-bottom: 20px; display: block; }
-
-  .success-title {
-    font-family: 'UnifrakturMaguntia', cursive;
-    font-size: 2.4rem;
-    color: var(--rust);
-    margin-bottom: 16px;
-  }
-
-  .success-text {
-    font-size: 1.05rem;
-    line-height: 1.8;
-    color: var(--ink);
-    font-style: italic;
-    max-width: 500px;
-    margin: 0 auto 24px;
-  }
-
-  .incantation {
-    font-style: italic;
-    font-weight: 700;
-    color: var(--rust);
-    font-size: 1.1rem;
-    display: block;
-    margin-top: 20px;
   }
 
   /* FOOTER */
@@ -473,7 +295,6 @@
 
 <div class="page">
 
-
   <!-- HEADER -->
   <header class="masthead">
     <div class="eyebrow">Face2Face with Gary · The Hat Council</div>
@@ -488,129 +309,54 @@
     </p>
   </header>
 
-  <!-- MAIN FORM -->
-  <div id="formWrap" netlify>
-    <form name="hat-council-submission" method="POST" data-netlify="true" enctype="multipart/form-data" onsubmit="handleSubmit(event)">
-
-    <!-- VILLAGE SELECTOR -->
-    <div class="village-section">
-      <span class="field-label">Step 1 — Which village are you from?</span>
-      <div class="villages">
-        <div class="village-btn" onclick="selectVillage('Deetle', this)">
-          <span class="village-btn-name">Deetle</span>
-          <span class="village-btn-desc">Artists · Dreamers · Wanderers</span>
-        </div>
-        <div class="village-btn" onclick="selectVillage('Dighnt', this)">
-          <span class="village-btn-name">Dighnt</span>
-          <span class="village-btn-desc">Builders · Rulers · Record-Keepers</span>
-        </div>
-        <div class="village-btn" onclick="selectVillage('Dee', this)">
-          <span class="village-btn-name">Dee</span>
-          <span class="village-btn-desc">Listeners · Rememberers · The Quiet</span>
-        </div>
+  <!-- VILLAGE REFERENCE -->
+  <div class="village-section">
+    <span class="field-label">Before you film — which village are you from?</span>
+    <div class="villages">
+      <div class="village-card">
+        <span class="village-card-name">Deetle</span>
+        <span class="village-card-desc">Artists · Dreamers · Wanderers</span>
       </div>
-    <input type="hidden" name="form-name" value="hat-council-submission" />
-    <input type="hidden" name="village" id="selectedVillage" value="" />
+      <div class="village-card">
+        <span class="village-card-name">Dighnt</span>
+        <span class="village-card-desc">Builders · Rulers · Record-Keepers</span>
+      </div>
+      <div class="village-card">
+        <span class="village-card-name">Dee</span>
+        <span class="village-card-desc">Listeners · Rememberers · The Quiet</span>
+      </div>
     </div>
-
-    <!-- FORM FIELDS -->
-    <div class="form-section">
-
-      <div class="field-group">
-        <label class="field-label" for="fullName">Step 2 — Your name</label>
-        <input class="field-input" type="text" id="fullName" name="full-name" placeholder="The name the Council will call you by" />
-      </div>
-
-      <div class="field-group">
-        <label class="field-label" for="email">Step 3 — Your email</label>
-        <input class="field-input" type="email" id="email" name="email" placeholder="For Council correspondence only" />
-      </div>
-
-      <div class="field-group">
-        <label class="field-label" for="instagram">Step 4 — Your Instagram handle (optional)</label>
-        <input class="field-input" type="text" id="instagram" name="instagram" placeholder="@yourhandle — for on-screen credit" />
-      </div>
-
-      <div class="field-group">
-        <label class="field-label" for="whyVillage">Step 5 — Why are you from that village?</label>
-        <textarea class="field-input" id="whyVillage" name="why-village" placeholder="Explain why you belong to Deetle, Dighnt, or Dee."></textarea>
-      </div>
-
-      <div class="field-group">
-        <label class="field-label" for="valises">Step 6 — Declare your Valises</label>
-        <textarea class="field-input" id="valises" name="valises" placeholder="What burdens are you carrying that were never yours? Declare them here and assert clearly — those Valises do not belong to you. The Council will judge."></textarea>
-      </div>
-
-      <div class="field-group">
-        <label class="field-label">Step 7 — Upload your 20-second video</label>
-        <div class="upload-zone" id="uploadZone">
-          <input type="file" id="videoFile" name="video" accept="video/*" onchange="handleFile(this)" />
-          <span class="upload-icon">🎬</span>
-          <div class="upload-text">Tap to select your video — 20 seconds maximum</div>
-          <div class="upload-sub">In your video: declare your village AND declare that your Valises do not belong to you.</div>
-          <div class="upload-filename" id="fileName"></div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- LEGAL RELEASE -->
-    <div class="legal-box">
-      <div class="legal-title">⚖ Submission Release Agreement</div>
-      <p class="legal-text">
-        By submitting a video to Face2Face with Gary, operating as
-        <strong>Deetle Deetle Dighnt Dighnt</strong>, you agree to the following terms: 
-      </p>
-      <p>The Hat Council takes submissions seriously. Here is what that means.</p>
-      <ul class="legal-items">
-        <li>You grant Face2Face with Gary an unlimited, royalty-free license to use, edit, clip, and publish your submitted video across all platforms including but not limited to Instagram, TikTok, YouTube, and any future platforms.</li>
-        <li>You confirm that you are the sole creator of the submitted video and that it does not infringe on any third-party rights, copyrights, or trademarks.</li>
-        <li>You understand that submission does not guarantee inclusion in any episode. Selection is at Gary's sole discretion.</li>
-        <li>You acknowledge that no payment or compensation will be provided in exchange for your submission or its use.</li>
-        <li>You understand that Face2Face with Gary may generate revenue from content that includes your submission and you are not entitled to any portion of that revenue.</li>
-        <li>You confirm that you are 18 years of age or older, or have obtained parental or guardian consent.</li>
-        <li>Face2Face with Gary reserves the right to remove your submission from any published content at any time without notice.</li>
-        <li>This agreement does not constitute an employment, partnership, or agency relationship of any kind.</li>
-      </ul>
-      <p class="legal-text">
-        <strong>Note:</strong> This release is provided for informational purposes and does not constitute legal advice.
-        Face2Face with Gary recommends consulting a licensed attorney for formal legal protection.
-      </p>
-    </div>
-
-    <!-- CHECKBOX -->
-    <label class="checkbox-group">
-      <input type="checkbox" id="agreeBox" onchange="toggleSubmit()" />
-      <span class="checkbox-label">
-        I have read and agree to the Submission Release Agreement above. I confirm that I am 18 or older
-        and that I am the creator of this video. I understand this constitutes a binding agreement
-        between myself and Face2Face with Gary, operating as Deetle Deetle Dighnt Dighnt.
-      </span>
-    </label>
-
-    <!-- SUBMIT -->
-<button class="submit-btn" id="submitBtn" type="button" disabled onclick="window.open('https://docs.google.com/forms/d/1EfCFM812iDOFsP8Zj49y0DfZIahGP72gURnNkCrYizg/viewform', '_blank')">Present Yourself to the Council</button>
-    <p class="submit-note">The Council will review your submission. You will be contacted if selected.</p>
-
-  </form>
   </div>
 
-  <!-- SUCCESS SCREEN -->
-  <div class="success-screen" id="successScreen">
-    <span class="success-icon">🧳</span>
-    <h2 class="success-title">The Council Has Received You</h2>
-    <p class="success-text">
-      Your submission has been logged in the official record of the three villages.
-      The Council will deliberate. If selected, you will be contacted and credited
-      as a citizen of your village on screen.
+  <!-- LEGAL RELEASE -->
+  <div class="legal-box">
+    <div class="legal-title">⚖ Submission Release Agreement</div>
+    <p class="legal-text">
+      By submitting a video to Face2Face with Gary, operating as
+      <strong>Deetle Deetle Dighnt Dighnt</strong>, you agree to the following terms:
     </p>
-    <p class="success-text">
-      Until then — carry only what is yours.
+    <p>The Hat Council takes submissions seriously. Here is what that means.</p>
+    <ul class="legal-items">
+      <li>You grant Face2Face with Gary an unlimited, royalty-free license to use, edit, clip, and publish your submitted video across all platforms including but not limited to Instagram, TikTok, YouTube, and any future platforms.</li>
+      <li>You confirm that you are the sole creator of the submitted video and that it does not infringe on any third-party rights, copyrights, or trademarks.</li>
+      <li>You understand that submission does not guarantee inclusion in any episode. Selection is at Gary's sole discretion.</li>
+      <li>You acknowledge that no payment or compensation will be provided in exchange for your submission or its use.</li>
+      <li>You understand that Face2Face with Gary may generate revenue from content that includes your submission and you are not entitled to any portion of that revenue.</li>
+      <li>You confirm that you are 18 years of age or older, or have obtained parental or guardian consent.</li>
+      <li>Face2Face with Gary reserves the right to remove your submission from any published content at any time without notice.</li>
+      <li>This agreement does not constitute an employment, partnership, or agency relationship of any kind.</li>
+    </ul>
+    <p class="legal-text">
+      <strong>Note:</strong> This release is provided for informational purposes and does not constitute legal advice.
+      Face2Face with Gary recommends consulting a licensed attorney for formal legal protection.
     </p>
-    <span class="incantation">
-      "Deetle Deetle Dighnt Dighnt, Dighnt Deetle Dee —<br>
-      those valises don't belong to me."
-    </span>
+  </div>
+
+  <!-- THE ONE AND ONLY SUBMISSION FORM -->
+  <div class="submit-section">
+    <span class="field-label">Present yourself to the Council</span>
+    <a class="submit-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSccc02jlw3vinoBrclBZgvEloIumZ6Uwt_-jD8BAwakkNDAYg/viewform">Present Yourself to the Council</a>
+    <p class="submit-note">The Council will review your submission. You will be contacted if selected.</p>
   </div>
 
   <footer>
@@ -619,80 +365,6 @@
   </footer>
 
 </div>
-
-<script>
-  let villageSelected = false;
-
-  function selectVillage(name, el) {
-    document.querySelectorAll('.village-btn').forEach(b => b.classList.remove('selected'));
-    el.classList.add('selected');
-    document.getElementById('selectedVillage').value = name;
-    villageSelected = true;
-    toggleSubmit();
-  }
-
-  function handleFile(input) {
-    if (input.files && input.files[0]) {
-      const fn = document.getElementById('fileName');
-      fn.textContent = '✦ ' + input.files[0].name;
-      fn.style.display = 'block';
-    }
-  }
-
-  function toggleSubmit() {
-    const agreed = document.getElementById('agreeBox').checked;
-    document.getElementById('submitBtn').disabled = !(agreed && villageSelected);
-  }
-
-  function handleSubmit(e) {
-    if (e) e.preventDefault();
-    const name = document.getElementById('fullName').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const village = document.getElementById('selectedVillage').value;
-
-    if (!name || !email || !village) {
-      alert('Please complete all required fields before presenting yourself to the Council.');
-      return;
-    }
-
-    const agreed = document.getElementById('agreeBox').checked ? 'Yes' : 'No';
-    const instagram = document.getElementById('instagram').value.trim();
-    const whyVillage = document.getElementById('whyVillage').value.trim();
-    const valises = document.getElementById('valises').value.trim();
-
-    const params = new URLSearchParams({
-      'full-name': name,
-      'email': email,
-      'instagram': instagram,
-      'village': village,
-      'why-village': whyVillage,
-      'valises': valises,
-      'agreed': agreed
-    });
-
-    const iframe = document.getElementById('submitFrame');
-    const form = document.createElement('form');
-    form.method = 'GET';
-    form.action = 'https://script.google.com/macros/s/AKfycbygzwngsi2o4EzLZ73TKXLlRL5BLqLHuYOR3jvjX6gh1sYw-sZqKBdYE-umIxhvK_NhLQ/exec';
-    form.target = 'submitFrame';
-
-    for (const [key, value] of params.entries()) {
-      const input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = key;
-      input.value = value;
-      form.appendChild(input);
-    }
-
-    document.body.appendChild(form);
-    form.submit();
-    document.body.removeChild(form);
-
-    document.getElementById('formWrap').style.display = 'none';
-    document.getElementById('successScreen').classList.add('visible');
-    window.scrollTo(0, 0);
-  }
-</script>
 
 </body>
 </html>
