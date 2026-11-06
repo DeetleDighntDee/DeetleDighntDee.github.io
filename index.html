@@ -473,6 +473,50 @@
     .signup-form button { width: 100%; }
     .story-block { padding: 28px 22px; }
   }
+
+  /* VILLAGE TUSSLE SHOP */
+  .tussle {
+    text-align: center;
+    margin: 0 auto 56px;
+    padding: 36px 24px 32px;
+    border: 2px solid var(--rust);
+    background: var(--card-bg);
+  }
+  .tussle-label {
+    font-family: 'Cutive Mono', monospace;
+    font-size: 0.85rem; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .tussle-heading {
+    font-family: 'UnifrakturMaguntia', cursive;
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.1; color: var(--rust);
+    margin-bottom: 10px;
+  }
+  .tussle-sub { font-style: italic; margin-bottom: 24px; }
+  .tussle-buttons {
+    display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  }
+  .tussle-btn {
+    flex: 1 1 180px; max-width: 220px;
+    display: block; padding: 16px 12px;
+    background: var(--rust); color: var(--parchment);
+    font-family: 'Cutive Mono', monospace;
+    font-size: 0.95rem; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    text-decoration: none;
+  }
+  .tussle-btn:hover { background: #000000; }
+  .tussle-signup { margin-top: 26px; font-size: 1rem; }
+  .tussle-signup a {
+    color: var(--rust); font-weight: 700;
+    font-family: 'Cutive Mono', monospace;
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  @media (max-width: 600px) {
+    .tussle-btn { max-width: none; flex-basis: 100%; }
+  }
 </style>
 </head>
 <body>
@@ -502,6 +546,19 @@
       and <strong>the Valises on the seat are never yours to move.</strong>
     </p>
   </header>
+
+  <!-- THE GREAT VILLAGE TUSSLE: SHOP -->
+  <section class="tussle">
+    <div class="tussle-label">Now Open &nbsp;·&nbsp; The Great Village Tussle</div>
+    <h2 class="tussle-heading">Pick Your Village</h2>
+    <p class="tussle-sub">Three villages. One tussle. Wear your side.</p>
+    <div class="tussle-buttons">
+      <a class="tussle-btn" href="https://www.face2facewithgary.com/product-page/team-deetle-the-great-village-tussle-tee" target="_blank" rel="noopener">Team Deetle Tee</a>
+      <a class="tussle-btn" href="https://www.face2facewithgary.com/product-page/dighnt-great-village-tussle-t-shirt-deetle-deetle-dighnt-dighnt-tee" target="_blank" rel="noopener">Team Dighnt Tee</a>
+      <a class="tussle-btn" href="https://www.face2facewithgary.com/product-page/team-dee-the-great-village-tussle-tee" target="_blank" rel="noopener">Team Dee Tee</a>
+    </div>
+    <p class="tussle-signup">Hear the Council first &mdash; <a href="https://garys-newsletter-7e1c91.beehiiv.com/subscribe" target="_blank" rel="noopener">Join the Dispatches</a></p>
+  </section>
 
   <!-- VALISE SCENE -->
   <div class="valise-scene">
