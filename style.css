@@ -8,6 +8,9 @@
   --gold: #f5b82e;
   --teal: #48d2b4;
   --lilac: #b79cff;
+  --deetle: #4fa8ff;
+  --dighnt: #f5b82e;
+  --dee: #5ad46e;
   --display: 'Bricolage Grotesque', 'Arial Black', sans-serif;
   --body: 'Atkinson Hyperlegible', Verdana, sans-serif;
 }
@@ -58,10 +61,10 @@ p + p { margin-top: 16px; }
   letter-spacing: -0.04em;
 }
 .chant span { display: block; }
-.chant .l1 { color: var(--gold); }
-.chant .l2 { color: var(--teal); }
+.chant .l1 { color: var(--deetle); }
+.chant .l2 { color: var(--dighnt); }
 .chant .l3 {
-  color: var(--lilac);
+  color: var(--dee);
   font-size: 0.55em;
   margin-top: 0.25em;
 }
@@ -97,9 +100,9 @@ p + p { margin-top: 16px; }
   transform: rotate(var(--tilt));
   transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
-.tag:nth-child(1) { background: var(--gold); --tilt: -2deg; }
-.tag:nth-child(2) { background: var(--teal); --tilt: 1.5deg; }
-.tag:nth-child(3) { background: var(--lilac); --tilt: -1deg; }
+.tag:nth-child(1) { background: var(--deetle); --tilt: -2deg; }
+.tag:nth-child(2) { background: var(--dighnt); --tilt: 1.5deg; }
+.tag:nth-child(3) { background: var(--dee); --tilt: -1deg; }
 
 .tag:hover, .tag:focus-visible {
   transform: rotate(0deg) translateY(-6px);
@@ -254,9 +257,9 @@ p + p { margin-top: 16px; }
 
 .village-pick { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 8px 0 8px; }
 .village-pick div { border-radius: 14px; padding: 18px 14px; color: var(--night-deep); }
-.village-pick div:nth-child(1) { background: var(--gold); }
-.village-pick div:nth-child(2) { background: var(--teal); }
-.village-pick div:nth-child(3) { background: var(--lilac); }
+.village-pick div:nth-child(1) { background: var(--deetle); }
+.village-pick div:nth-child(2) { background: var(--dighnt); }
+.village-pick div:nth-child(3) { background: var(--dee); }
 .village-pick b { display: block; font-family: var(--display); font-weight: 800; font-size: 1.9rem; line-height: 1; margin-bottom: 6px; }
 .village-pick span { font-size: 0.95rem; line-height: 1.35; display: block; }
 
