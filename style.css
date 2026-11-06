@@ -295,3 +295,7 @@ footer .sign { font-family: var(--display); font-weight: 800; font-size: 1.3rem;
   .ticker { animation: none; }
   .tag, .btn { transition: none; }
 }
+
+/* Card text is always solid black for readability */
+.tag .tag-team, .tag .tag-name, .tag .tag-who,
+.village-pick b, .village-pick span { color: #000000; }
