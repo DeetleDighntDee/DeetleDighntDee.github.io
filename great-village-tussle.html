@@ -71,6 +71,10 @@ input[type=text]:focus{outline:2px solid var(--gold)}
 .small-links a{color:var(--gold)}
 .toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--gold);color:#1a1408;padding:10px 16px;border-radius:10px;font-family:Cinzel,serif;font-size:14px;opacity:0;transition:opacity .3s;pointer-events:none}
 .toast.on{opacity:1}
+.card-wrap{display:none;text-align:center;margin-top:4px}
+.card-wrap.on{display:block}
+.card-wrap img{width:100%;max-width:420px;border-radius:12px;border:1px solid #3a3248;-webkit-touch-callout:default}
+.card-note{font-size:16px;color:var(--muted);margin-top:10px;line-height:1.4}
 footer{text-align:center;color:var(--muted);font-size:14px;margin-top:30px}
 </style>
 </head>
@@ -128,7 +132,14 @@ footer{text-align:center;color:var(--muted);font-size:14px;margin-top:30px}
     <div class="proc" id="proc"></div>
     <a class="btn merch" id="merchBtn" href="#" target="_blank" rel="noopener">Wear Your Village</a>
     <div class="links">
+      <button class="btn ghost" id="imgBtn">Get My Proclamation Image</button>
+      <div class="card-wrap" id="cardWrap">
+        <img id="cardImg" alt="Your official Hat Council proclamation">
+        <div class="card-note">Press and hold the image → <b>Save to Photos</b>.<br>Post it to your story or TikTok and tag <b>@face2facewithgary</b>.</div>
+        <button class="btn" id="shareBtn" style="display:none">Share Image</button>
+      </div>
       <button class="btn ghost" id="copyBtn">Copy My Proclamation</button>
+      <div class="hint" style="text-align:center">Paste it in the comments of any Tussle video. The Council reads every one.</div>
       <a class="btn ghost" id="emailBtn" href="#" target="_blank" rel="noopener">Join the Village Ledger (Email)</a>
     </div>
     <div class="small-links">
@@ -259,12 +270,91 @@ function renderTemple(){
   $("merchBtn").textContent = t.merch;
   $("merchBtn").href = LINKS[state.team];
   $("merchBtn").style.background = t.color;
+  $("cardWrap").classList.remove("on"); $("imgBtn").style.display = "block"; $("imgBtn").textContent = "Get My Proclamation Image"; $("shareBtn").style.display = "none";
 }
 $("copyBtn").onclick = async () => {
   const {t,total,title} = procText();
   const txt = `${t.head}\n${state.name} — TEAM ${t.name} · ${title}\n${t.line}\nValises declared not mine: ${state.valises}\nDEETLE DEETLE DIGHNT DIGHNT, DIGHNT DEETLE DEE — ${state.name.toUpperCase()} IS CANON. MEETING ADJOURNED!\n${total}/15 · The Great Village Tussle · @face2facewithgary`;
   try { await navigator.clipboard.writeText(txt); toast("Copied. Post it. Tag @face2facewithgary."); }
   catch(e){ toast("Copy blocked — screenshot it instead."); }
+};
+/* Proclamation image (1080x1920, story size) */
+function wrap(ctx, text, x, y, maxW, lh){
+  const words = text.split(" "); let line = ""; const lines = [];
+  for(const w of words){ const t = line ? line+" "+w : w; if(ctx.measureText(t).width > maxW && line){ lines.push(line); line = w; } else line = t; }
+  if(line) lines.push(line);
+  lines.forEach((l,i) => ctx.fillText(l, x, y + i*lh));
+  return y + lines.length*lh;
+}
+function fitFont(ctx, text, weight, family, start, maxW){
+  let s = start; ctx.font = `${weight} ${s}px ${family}`;
+  while(ctx.measureText(text).width > maxW && s > 30){ s -= 4; ctx.font = `${weight} ${s}px ${family}`; }
+  return s;
+}
+async function drawCard(){
+  try { await Promise.all([document.fonts.load('700 60px Cinzel'), document.fonts.load('400 40px "EB Garamond"'), document.fonts.load('italic 40px "EB Garamond"')]); } catch(e){}
+  const {t,total,title} = procText();
+  const W=1080, H=1920, c=document.createElement("canvas"); c.width=W; c.height=H;
+  const x=c.getContext("2d"), CZ="Cinzel, Georgia, serif", GA='"EB Garamond", Georgia, serif';
+  // night background
+  const bg=x.createRadialGradient(W/2,300,100,W/2,900,1300); bg.addColorStop(0,"#2a1f40"); bg.addColorStop(1,"#0b0910");
+  x.fillStyle=bg; x.fillRect(0,0,W,H);
+  // parchment
+  const px=80, py=150, pw=W-160, ph=H-300;
+  const pg=x.createRadialGradient(W/2,H/2,200,W/2,H/2,1000); pg.addColorStop(0,"#f7ecd2"); pg.addColorStop(1,"#d9c194");
+  x.fillStyle=pg; x.fillRect(px,py,pw,ph);
+  // borders: team color + gold
+  x.lineWidth=18; x.strokeStyle=t.color; x.strokeRect(px+20,py+20,pw-40,ph-40);
+  x.lineWidth=4; x.strokeStyle="#b8902f"; x.strokeRect(px+44,py+44,pw-88,ph-88);
+  // scroll rods
+  [py-10, py+ph-30].forEach(yy => { const rg=x.createLinearGradient(0,yy,0,yy+40); rg.addColorStop(0,"#8a5a2b"); rg.addColorStop(.5,"#c48a4a"); rg.addColorStop(1,"#5e3a17"); x.fillStyle=rg; x.fillRect(px-40,yy,pw+80,40); x.fillStyle="#E8C96A"; x.beginPath(); x.arc(px-40,yy+20,26,0,7); x.arc(px+pw+40,yy+20,26,0,7); x.fill(); });
+  x.textAlign="center"; const cx=W/2, maxW=pw-200; let y=py+120;
+  x.fillStyle="#3a2a18"; x.font=`700 34px ${CZ}`; x.fillText("HEAR YE! HEAR YE!", cx, y); y+=56;
+  x.font=`700 30px ${CZ}`; x.fillText("OFFICIAL PROCLAMATION OF THE HAT COUNCIL", cx, y); y+=40;
+  x.fillStyle="#b8902f"; x.fillRect(cx-220,y,440,3); y+=55;
+  x.fillStyle={deetle:"#2a3f9e",dighnt:"#8a6508",dee:"#1f6b52",valise:"#7a4a26"}[state.team];
+  fitFont(x, t.head, 700, CZ, 34, maxW); y = wrap(x, t.head, cx, y, maxW, 46) + 25;
+  // name
+  x.fillStyle="#211a13"; const ns=fitFont(x, state.name.toUpperCase(), 900, CZ, 96, maxW); x.fillText(state.name.toUpperCase(), cx, y+ns*0.8); y+=ns+30;
+  x.fillStyle={deetle:"#2a3f9e",dighnt:"#8a6508",dee:"#1f6b52",valise:"#7a4a26"}[state.team];
+  x.font=`700 36px ${CZ}`; y = wrap(x, `TEAM ${t.name} · ${title.toUpperCase()}`, cx, y+10, maxW, 48) + 50;
+  // body
+  x.fillStyle="#2b2117"; x.font=`400 40px ${GA}`;
+  y = wrap(x, "Having passed the Checkpoint, ridden the Train to Nowhere, and survived the Boulder, the Council declares:", cx, y, maxW, 54) + 10;
+  y = wrap(x, t.line, cx, y, maxW, 54) + 40;
+  x.font=`italic 36px ${GA}`; x.fillStyle="#5a4a36";
+  y = wrap(x, `Valises declared not theirs: ${state.valises}`, cx, y, maxW, 48) + 50;
+  // chorus
+  x.fillStyle="#7a5a10"; x.font=`700 32px ${CZ}`;
+  y = wrap(x, "DEETLE DEETLE DIGHNT DIGHNT, DIGHNT DEETLE DEE", cx, y, maxW, 44) + 16;
+  x.fillStyle="#211a13"; fitFont(x, `${state.name.toUpperCase()} IS CANON.`, 900, CZ, 54, maxW);
+  x.fillText(`${state.name.toUpperCase()} IS CANON.`, cx, y+30); y+=80;
+  x.font=`700 32px ${CZ}`; x.fillStyle="#7a5a10"; x.fillText("MEETING ADJOURNED!", cx, y);
+  x.font=`700 26px ${CZ}`; x.fillStyle="#3a2a18"; x.fillText(`${total} OF 15 · THE GREAT VILLAGE TUSSLE`, cx, y+58);
+  // wax seal pressed onto the bottom scroll rod (never over the text)
+  const sy=py+ph-60; x.fillStyle={deetle:"#2a3f9e",dighnt:"#a07410",dee:"#1f6b52",valise:"#8a2a1e"}[state.team];
+  x.beginPath(); x.arc(cx,sy,80,0,7); x.fill(); x.lineWidth=6; x.strokeStyle="rgba(0,0,0,.25)"; x.beginPath(); x.arc(cx,sy,62,0,7); x.stroke();
+  x.font="66px serif"; x.textBaseline="middle"; x.fillText(t.emb, cx, sy+4); x.textBaseline="alphabetic";
+  // footer
+  x.fillStyle="#E8C96A"; x.font=`700 40px ${CZ}`; x.fillText("@face2facewithgary", cx, H-80);
+  x.fillStyle="#b9ad93"; x.font=`400 30px ${GA}`; x.fillText("Pick your side · deetledighntdee.github.io/great-village-tussle.html", cx, H-36);
+  return c;
+}
+$("imgBtn").onclick = async () => {
+  $("imgBtn").textContent = "Sealing your proclamation…";
+  const c = await drawCard();
+  $("cardImg").src = c.toDataURL("image/png");
+  $("cardWrap").classList.add("on");
+  $("imgBtn").style.display = "none";
+  c.toBlob(b => {
+    try {
+      const file = new File([b], "my-tussle-proclamation.png", {type:"image/png"});
+      if(navigator.canShare && navigator.canShare({files:[file]})){
+        $("shareBtn").style.display = "block";
+        $("shareBtn").onclick = () => navigator.share({files:[file], title:"My Great Village Tussle Proclamation"}).catch(()=>{});
+      }
+    } catch(e){}
+  });
 };
 $("emailBtn").href = LINKS.email;
 $("submitLink").href = LINKS.submit;
