@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Great Village Tussle — Pick Your Side</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* ====== EDIT YOUR LINKS HERE ====== */
+:root{
+  --bg:#0d0b14; --panel:#17131f; --gold:#E8C96A; --ink:#f4ead2; --muted:#b9ad93;
+  --deetle:#2a3f9e; --dighnt:#b8860b; --dee:#1f6b52; --valise:#7a4a26;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"EB Garamond",Georgia,serif;font-size:18px}
+body{background:radial-gradient(ellipse at top,#231a35 0%,var(--bg) 60%) fixed}
+.wrap{max-width:640px;margin:0 auto;padding:28px 18px 60px}
+h1,h2,h3,.cinzel{font-family:Cinzel,Georgia,serif;letter-spacing:.04em}
+h1{color:var(--gold);font-size:clamp(30px,8vw,46px);line-height:1.05;text-align:center;margin:8px 0 6px;text-shadow:0 3px 0 #000}
+.kicker{text-align:center;font-family:Cinzel,serif;font-size:13px;letter-spacing:.25em;color:var(--muted)}
+.lede{text-align:center;color:var(--muted);font-style:italic;margin:6px 0 22px}
+.progress{display:flex;gap:6px;justify-content:center;margin:0 0 22px}
+.progress i{width:28px;height:5px;border-radius:3px;background:#3a3248}
+.progress i.on{background:var(--gold)}
+.screen{display:none;animation:fade .35s ease}
+.screen.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card{background:var(--panel);border:1px solid #3a3248;border-radius:14px;padding:20px;margin-bottom:16px}
+h2{font-size:22px;color:var(--gold);margin:0 0 6px;text-align:center}
+.sub{text-align:center;color:var(--muted);margin:0 0 16px}
+.teams{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.team{border:2px solid transparent;border-radius:12px;padding:16px 12px;text-align:center;cursor:pointer;color:#fff;font-family:inherit;transition:transform .15s}
+.team:hover{transform:translateY(-2px)}
+.team.sel{border-color:var(--gold);box-shadow:0 0 0 3px rgba(232,201,106,.35)}
+.team .emb{font-size:34px;display:block}
+.team strong{font-family:Cinzel,serif;font-size:19px;display:block;margin-top:4px}
+.team small{display:block;opacity:.85;font-size:14px}
+.t-deetle{background:linear-gradient(160deg,#3550c4,#1a2560)}
+.t-dighnt{background:linear-gradient(160deg,#d19a1c,#6e4f06)}
+.t-dee{background:linear-gradient(160deg,#2b8a6b,#0f3d2e)}
+.t-valise{background:linear-gradient(160deg,#9a6236,#3d230f)}
+label{display:block;font-family:Cinzel,serif;font-size:13px;letter-spacing:.12em;color:var(--gold);margin:14px 0 6px}
+input[type=text]{width:100%;padding:13px;border-radius:10px;border:1px solid #4a4058;background:#0f0c16;color:var(--ink);font:inherit}
+input[type=text]:focus{outline:2px solid var(--gold)}
+.hint{font-size:14px;color:var(--muted);margin-top:4px}
+.btn{display:block;width:100%;padding:15px;border:0;border-radius:12px;background:var(--gold);color:#1a1408;font-family:Cinzel,serif;font-weight:700;font-size:17px;letter-spacing:.06em;cursor:pointer;margin-top:18px;text-align:center;text-decoration:none}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.ghost{background:transparent;color:var(--gold);border:1px solid var(--gold)}
+.btn.merch{font-size:20px;padding:18px;box-shadow:0 6px 0 #8a6f22}
+.round-name{font-family:Cinzel,serif;color:var(--gold);font-size:13px;letter-spacing:.2em;text-align:center}
+.round-title{font-size:26px;text-align:center;margin:4px 0 10px}
+.challenge{text-align:center;font-size:19px;margin:0 0 16px}
+.scores{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.score{width:52px;height:52px;border-radius:50%;border:2px solid #4a4058;background:#0f0c16;color:var(--ink);font-family:Cinzel,serif;font-size:20px;cursor:pointer}
+.score.sel{background:var(--gold);color:#1a1408;border-color:var(--gold)}
+.scale{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-top:8px;padding:0 4px}
+.verdict{text-align:center;font-style:italic;color:var(--muted);min-height:26px;margin-top:12px}
+.temple{text-align:center}
+.temple .crown{font-size:56px}
+.proc{background:linear-gradient(180deg,#201a2c,#120f19);border:2px solid var(--gold);border-radius:14px;padding:24px 20px;text-align:center}
+.proc .head{font-family:Cinzel,serif;font-size:12px;letter-spacing:.25em;color:var(--gold)}
+.proc .who{font-family:Cinzel,serif;font-size:clamp(26px,7vw,36px);color:#fff;margin:10px 0 4px}
+.proc .teamline{font-family:Cinzel,serif;font-size:14px;letter-spacing:.15em}
+.proc p{font-size:19px;line-height:1.5;margin:14px 0}
+.proc .valises{font-size:16px;color:var(--muted)}
+.proc .chorus{font-family:Cinzel,serif;color:var(--gold);font-size:15px;letter-spacing:.06em;margin-top:16px}
+.total{font-family:Cinzel,serif;font-size:15px;color:var(--muted);margin-top:8px}
+.links{display:grid;gap:10px;margin-top:6px}
+.small-links{text-align:center;font-size:15px;color:var(--muted);margin-top:18px}
+.small-links a{color:var(--gold)}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--gold);color:#1a1408;padding:10px 16px;border-radius:10px;font-family:Cinzel,serif;font-size:14px;opacity:0;transition:opacity .3s;pointer-events:none}
+.toast.on{opacity:1}
+footer{text-align:center;color:var(--muted);font-size:14px;margin-top:30px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">THE HAT COUNCIL PRESENTS</div>
+  <h1>THE GREAT VILLAGE TUSSLE</h1>
+  <div class="lede">Pick a side. Declare what isn't yours. Become canon.</div>
+  <div class="progress" id="progress"></div>
+
+  <!-- 1. PICK TEAM -->
+  <section class="screen active" data-step="0">
+    <div class="card">
+      <h2>Pick Your Team</h2>
+      <p class="sub">Choose carefully. The Council is watching.</p>
+      <div class="teams" id="teams"></div>
+      <button class="btn" id="toDeclare" disabled>Declare My Village</button>
+    </div>
+  </section>
+
+  <!-- 2. DECLARE -->
+  <section class="screen" data-step="1">
+    <div class="card">
+      <h2 id="declareTitle">Declare Your Village</h2>
+      <p class="sub">Speak it clearly. The Temple is listening.</p>
+      <label for="name">Your Name</label>
+      <input type="text" id="name" maxlength="28" placeholder="As the Council should record it">
+      <label for="valises">The Valises That Don't Belong To You</label>
+      <input type="text" id="valises" maxlength="90" placeholder="e.g. Monday, my cousin's opinions, the group chat">
+      <div class="hint">Name up to three, separated by commas. It was never yours to carry.</div>
+      <button class="btn" id="toRounds" disabled>Begin the Tussle</button>
+    </div>
+  </section>
+
+  <!-- 3. ROUNDS -->
+  <section class="screen" data-step="2">
+    <div class="card" id="roundCard">
+      <div class="round-name" id="roundNum"></div>
+      <h3 class="round-title" id="roundTitle"></h3>
+      <p class="challenge" id="roundChallenge"></p>
+      <div class="scores" id="scoreBtns"></div>
+      <div class="scale"><span>0 · The Council noticed</span><span>5 · Legendary</span></div>
+      <div class="verdict" id="roundVerdict"></div>
+      <button class="btn" id="nextRound" disabled>Next</button>
+    </div>
+  </section>
+
+  <!-- 4. TEMPLE -->
+  <section class="screen" data-step="3">
+    <div class="temple">
+      <div class="crown">👑</div>
+      <h2>The Temple of Deetle</h2>
+      <p class="sub">The doors open. The Council stands. The Valise does not move.</p>
+    </div>
+    <div class="proc" id="proc"></div>
+    <a class="btn merch" id="merchBtn" href="#" target="_blank" rel="noopener">Wear Your Village</a>
+    <div class="links">
+      <button class="btn ghost" id="copyBtn">Copy My Proclamation</button>
+      <a class="btn ghost" id="emailBtn" href="#" target="_blank" rel="noopener">Join the Village Ledger (Email)</a>
+    </div>
+    <div class="small-links">
+      Film yourself reading it and <a id="submitLink" href="#" target="_blank" rel="noopener">Submit to the Council</a><br>
+      <a href="#" id="again">Tussle again</a>
+    </div>
+  </section>
+
+  <footer>@face2facewithgary · Deetle Deetle Dighnt Dighnt, Dighnt Deetle Dee</footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ====== EDIT YOUR LINKS HERE — paste each tee's product link ====== */
+const LINKS = {
+  deetle: "https://www.face2facewithgary.com/product-page/team-deetle-the-great-village-tussle-tee",
+  dighnt: "https://www.face2facewithgary.com/product-page/dighnt-great-village-tussle-t-shirt-deetle-deetle-dighnt-dighnt-tee",
+  dee:    "https://www.face2facewithgary.com/product-page/team-dee-the-great-village-tussle-tee",
+  valise: "https://www.face2facewithgary.com/product-page/team-valise-the-great-village-tussle-tee",
+  email:  "https://deetledighntdee.github.io",
+  submit: "https://deetledighntdee.github.io/submit"
+};
+
+const TEAMS = {
+  deetle:{name:"DEETLE", cls:"t-deetle", emb:"🌙", motto:"Dreamers", color:"#7f9bff",
+    head:"DEETLE PROCLAMATION — DREAMED, NOT DECREED",
+    line:"Dream. Create. Wander. We dreamed this champion, and so it is. DEETLE does not explain itself.",
+    merch:"Wear the Moon — TEAM DEETLE Tee"},
+  dighnt:{name:"DIGHNT", cls:"t-dighnt", emb:"🔨", motto:"Builders", color:"#f2c14e",
+    head:"DIGHNT PROCLAMATION — ENTERED INTO THE RECORD",
+    line:"Build. Record. Remember. This champion was stacked brick by brick and entered into the Record Book. Sealed.",
+    merch:"Wear the Brick — TEAM DIGHNT Tee"},
+  dee:{name:"DEE", cls:"t-dee", emb:"🌳", motto:"Rememberers", color:"#6fd3a8",
+    head:"DEE PROCLAMATION — SAID QUIETLY",
+    line:"Listen. Learn. Keep. The lantern stays lit. DEE will remember this champion long after the others forget.",
+    merch:"Wear the Roots — TEAM DEE Tee"},
+  valise:{name:"VALISE", cls:"t-valise", emb:"🧳", motto:"The Comeback", color:"#e0a46c",
+    head:"CONDUCTOR'S PROCLAMATION — THE SEAT IS DECIDED",
+    line:"No one booked a seat for the Valise. No one paid the fare. And yet — here it sits. The Valise refused to move, and the seat is theirs.",
+    merch:"Claim the Seat — TEAM VALISE Tee"}
+};
+
+const ROUNDS = [
+  {title:"The Checkpoint", challenge:"Say out loud, to someone: “These Valises do not belong to me.” Score how clearly you declared it.",
+   verdicts:["The Council noticed.","A whisper. The Checkpoint squints.","Heard, mostly.","Clear, calm, declared.","The Checkpoint opens.","Declared first. Declared clearly."]},
+  {title:"The Train to Nowhere", challenge:"Stillness is strategy. Hold perfectly still for 10 seconds — and do not say “k.” Score your stillness.",
+   verdicts:["You chased the train.","You fidgeted. The Conductor sighed.","Mostly still. Mostly.","The Train arrived on time.","The Conductor approves.","Legendary stillness."]},
+  {title:"Before the Boulder", challenge:"Say “Deetle Deetle Dighnt Dighnt, Dighnt Deetle Dee” three times fast without laughing. Score yourself honestly. The Boulder knows.",
+   verdicts:["The Boulder heard everything.","The Boulder rolled closer.","The Boulder is unimpressed.","The Boulder stands down — for now.","The Boulder nods.","The Boulder bows. Boulders never bow."]}
+];
+
+const TITLES = [
+  [0,"Citizen of the Platform"],[6,"Keeper of the Lantern"],[10,"Champion of the Train"],[13,"Grand Champion of the Tussle"]
+];
+
+const state = {team:null, name:"", valises:"", scores:[null,null,null], round:0};
+const $ = id => document.getElementById(id);
+const screens = [...document.querySelectorAll(".screen")];
+
+function show(step){
+  screens.forEach(s => s.classList.toggle("active", +s.dataset.step === step));
+  $("progress").innerHTML = [0,1,2,3].map(i => `<i class="${i<=step?'on':''}"></i>`).join("");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+/* Teams */
+$("teams").innerHTML = Object.entries(TEAMS).map(([id,t]) =>
+  `<button class="team ${t.cls}" data-id="${id}"><span class="emb">${t.emb}</span><strong>${t.name}</strong><small>${t.motto}</small></button>`).join("");
+$("teams").addEventListener("click", e => {
+  const b = e.target.closest(".team"); if(!b) return;
+  state.team = b.dataset.id;
+  document.querySelectorAll(".team").forEach(x => x.classList.toggle("sel", x === b));
+  $("toDeclare").disabled = false;
+});
+$("toDeclare").onclick = () => { $("declareTitle").textContent = `Declare for TEAM ${TEAMS[state.team].name}`; show(1); };
+
+/* Declare */
+function checkDeclare(){ $("toRounds").disabled = !($("name").value.trim() && $("valises").value.trim()); }
+$("name").oninput = checkDeclare; $("valises").oninput = checkDeclare;
+$("toRounds").onclick = () => {
+  state.name = $("name").value.trim();
+  state.valises = $("valises").value.split(",").map(v => v.trim()).filter(Boolean).slice(0,3).join(", ");
+  state.round = 0; state.scores = [null,null,null];
+  renderRound(); show(2);
+};
+
+/* Rounds */
+function renderRound(){
+  const r = ROUNDS[state.round];
+  $("roundNum").textContent = `ROUND ${state.round+1} OF 3`;
+  $("roundTitle").textContent = r.title;
+  $("roundChallenge").textContent = r.challenge;
+  $("roundVerdict").textContent = "";
+  $("nextRound").disabled = true;
+  $("nextRound").textContent = state.round < 2 ? "Next Round" : "Enter the Temple";
+  $("scoreBtns").innerHTML = [0,1,2,3,4,5].map(n => `<button class="score" data-n="${n}">${n}</button>`).join("");
+}
+$("scoreBtns").addEventListener("click", e => {
+  const b = e.target.closest(".score"); if(!b) return;
+  const n = +b.dataset.n;
+  state.scores[state.round] = n;
+  document.querySelectorAll(".score").forEach(x => x.classList.toggle("sel", x === b));
+  $("roundVerdict").textContent = ROUNDS[state.round].verdicts[n];
+  $("nextRound").disabled = false;
+});
+$("nextRound").onclick = () => {
+  if(state.round < 2){ state.round++; renderRound(); }
+  else { renderTemple(); show(3); }
+};
+
+/* Temple */
+function esc(s){ return s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+function procText(){
+  const t = TEAMS[state.team], total = state.scores.reduce((a,b)=>a+b,0);
+  const title = TITLES.filter(x => total >= x[0]).pop()[1];
+  return {t,total,title};
+}
+function renderTemple(){
+  const {t,total,title} = procText();
+  $("proc").innerHTML = `
+    <div class="head">${t.head}</div>
+    <div class="who">${esc(state.name)}</div>
+    <div class="teamline" style="color:${t.color}">TEAM ${t.name} · ${title.toUpperCase()}</div>
+    <p>Hear ye! Hear ye! Having passed the Checkpoint, ridden the Train to Nowhere, and survived the Boulder — ${t.line}</p>
+    <div class="valises">Valises declared not theirs: <em>${esc(state.valises)}</em></div>
+    <div class="chorus">DEETLE DEETLE DIGHNT DIGHNT, DIGHNT DEETLE DEE —<br>${esc(state.name).toUpperCase()} IS CANON. MEETING ADJOURNED!</div>
+    <div class="total">${total} of 15 points</div>`;
+  $("merchBtn").textContent = t.merch;
+  $("merchBtn").href = LINKS[state.team];
+  $("merchBtn").style.background = t.color;
+}
+$("copyBtn").onclick = async () => {
+  const {t,total,title} = procText();
+  const txt = `${t.head}\n${state.name} — TEAM ${t.name} · ${title}\n${t.line}\nValises declared not mine: ${state.valises}\nDEETLE DEETLE DIGHNT DIGHNT, DIGHNT DEETLE DEE — ${state.name.toUpperCase()} IS CANON. MEETING ADJOURNED!\n${total}/15 · The Great Village Tussle · @face2facewithgary`;
+  try { await navigator.clipboard.writeText(txt); toast("Copied. Post it. Tag @face2facewithgary."); }
+  catch(e){ toast("Copy blocked — screenshot it instead."); }
+};
+$("emailBtn").href = LINKS.email;
+$("submitLink").href = LINKS.submit;
+$("again").onclick = e => { e.preventDefault(); state.team=null; document.querySelectorAll(".team").forEach(x=>x.classList.remove("sel")); $("toDeclare").disabled=true; show(0); };
+
+function toast(m){ const t=$("toast"); t.textContent=m; t.classList.add("on"); setTimeout(()=>t.classList.remove("on"),2600); }
+show(0);
+</script>
+</body>
+</html>
