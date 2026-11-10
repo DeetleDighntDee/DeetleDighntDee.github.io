@@ -11,6 +11,7 @@
   --deetle: #4fa8ff;
   --dighnt: #f5b82e;
   --dee: #5ad46e;
+  --valise: #e0a46c;
   --display: 'Bricolage Grotesque', 'Arial Black', sans-serif;
   --body: 'Atkinson Hyperlegible', Verdana, sans-serif;
 }
@@ -84,7 +85,9 @@ p + p { margin-top: 16px; }
 
 .tags {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 900px;
+  margin: 0 auto;
   gap: 28px;
 }
 
@@ -103,6 +106,8 @@ p + p { margin-top: 16px; }
 .tag:nth-child(1) { background: var(--deetle); --tilt: -2deg; }
 .tag:nth-child(2) { background: var(--dighnt); --tilt: 1.5deg; }
 .tag:nth-child(3) { background: var(--dee); --tilt: -1deg; }
+.tag:nth-child(4) { background: var(--valise); --tilt: 2deg; }
+.play-wrap { text-align: center; margin: -16px 0 40px; }
 
 .tag:hover, .tag:focus-visible {
   transform: rotate(0deg) translateY(-6px);
