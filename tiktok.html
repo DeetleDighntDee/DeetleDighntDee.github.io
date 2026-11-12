@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<title>Deetle Deetle Dighnt Dighnt — The Council Receives You</title>
+<meta name="description" content="The Hat Council deliberates. The Villages are real. Declare your Village. Declare your Valises.">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --card: #171a22;
+    --line: #2a2f3b;
+    --text: #ece8de;
+    --muted: #a39f95;
+    --gold: #e0b84f;
+    --navy: #3d5a99;
+    --tan: #c9a878;
+    --green: #6fa65a;
+    --black: #555;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Georgia, "Times New Roman", serif;
+    line-height: 1.55;
+    padding: 28px 18px 48px;
+  }
+  .wrap { max-width: 520px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 28px; }
+  .chant {
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  h1 { font-size: 30px; line-height: 1.15; margin-bottom: 12px; }
+  .intro { color: var(--muted); font-size: 16px; }
+  .hats { display: flex; justify-content: center; gap: 8px; margin: 18px 0 4px; }
+  .hats span { width: 14px; height: 14px; border-radius: 50%; display: inline-block; }
+  .btn {
+    display: block;
+    text-decoration: none;
+    color: var(--text);
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 18px;
+    margin-bottom: 14px;
+    transition: border-color .2s, transform .1s;
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn:hover { border-color: var(--gold); }
+  .btn strong { display: block; font-size: 18px; margin-bottom: 3px; }
+  .btn small { color: var(--muted); font-size: 14px; }
+  .btn.main { border-color: var(--gold); }
+  .btn.main strong { color: var(--gold); }
+  section { margin: 34px 0 10px; }
+  h2 { font-size: 20px; margin-bottom: 12px; color: var(--gold); }
+  .council p { margin-bottom: 8px; font-size: 15px; }
+  .council b { color: var(--text); }
+  .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; }
+  .villages { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; text-align: center; }
+  .villages div { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 6px; font-weight: bold; letter-spacing: 1px; }
+  footer { text-align: center; color: var(--muted); font-size: 13px; margin-top: 40px; font-style: italic; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="chant">Deetle Deetle Dighnt Dighnt · Dighnt Deetle Dee</div>
+    <h1>The Council Receives You</h1>
+    <p class="intro">The Hat Council deliberates. The Villages are real. The Valises on the seat were never yours to move.</p>
+    <div class="hats" aria-hidden="true">
+      <span style="background:#ece8de"></span>
+      <span style="background:var(--navy)"></span>
+      <span style="background:var(--tan)"></span>
+      <span style="background:var(--green)"></span>
+      <span style="background:var(--black)"></span>
+    </div>
+  </header>
+
+  <a class="btn main" href="https://deetledighntdee.github.io/tussle-tiktok.html">
+    <strong>Pick Your Side — The Great Village Tussle</strong>
+    <small>Declare your Village. Receive your proclamation.</small>
+  </a>
+
+  <a class="btn" href="https://deetledighntdee.github.io/submit">
+    <strong>Bring Your Valises to the Council</strong>
+    <small>Declare a burden. Send a 20-second video.</small>
+  </a>
+
+  <a class="btn" href="https://garys-newsletter-7e1c91.beehiiv.com/subscribe">
+    <strong>Hear the Council First</strong>
+    <small>The newsletter. Free. The Valises remain.</small>
+  </a>
+
+  <section>
+    <h2>The Three Villages</h2>
+    <div class="villages">
+      <div>DEETLE</div>
+      <div>DIGHNT</div>
+      <div>DEE</div>
+    </div>
+  </section>
+
+  <section class="council">
+    <h2>The Hat Council</h2>
+    <p><span class="dot" style="background:#ece8de"></span><b>Gary</b> — no hat. Exempt. Tries to fix everything.</p>
+    <p><span class="dot" style="background:var(--navy)"></span><b>Otto</b> — navy fisherman cap. Asks questions that are not questions.</p>
+    <p><span class="dot" style="background:var(--tan)"></span><b>Stuart</b> — sideways tan cap. Arrives late. Is confidently wrong.</p>
+    <p><span class="dot" style="background:var(--green)"></span><b>Goober</b> — green straw hat. First to see the Valises for what they are.</p>
+    <p><span class="dot" style="background:var(--black)"></span><b>Ne'er</b> — backwards black cap. Wants to know who will deal with the Valises.</p>
+  </section>
+
+  <section>
+    <h2>I Won't Remove the Valises</h2>
+    <p class="intro">A man on a train would not move the Valises from the seat. The conductor threw them off. The man kept singing. The Valises were never his to carry. They are not yours either.</p>
+  </section>
+
+  <footer>The Valises have not been moved.</footer>
+
+</div>
+</body>
+</html>
